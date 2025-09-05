@@ -6,10 +6,12 @@ from sklearn.metrics.pairwise import cosine_similarity
 from scipy.sparse import hstack
 import re
 
-# Import loader functions from the loaders package
+# Import loader functions from the loaders package, gives cleaned data from both academic data sets
 from loaders.business import load_business_features
 from loaders.reviews import load_review_features
 
+# Edit query for better TFIDF recommendations.
+# Uses regex
 def clean_text_for_mood(text):
     """
     Enhanced text cleaning specifically for mood analysis.
@@ -370,7 +372,7 @@ def main():
     # Transform text to TF-IDF features for mood matching
     review_features, tfidf_vectorizer = create_tfidf_features(merged_data)
     
-    print(f"✅ Created TF-IDF features with {review_features.shape[1]} vocabulary terms")
+    #Created TF-IDF features with {review_features.shape[1]} vocabulary terms"
     
     # Prepare combined feature matrix (business + quality + text)
     X = prepare_features_for_similarity(merged_data, review_features)
@@ -384,19 +386,19 @@ def main():
     test_moods = ["romantic dinner", "casual lunch", "bar with music", "quiet coffee", "lively bar"]
     
     for mood in test_moods:
-        print(f"\n🎯 Query: '{mood}'")
+        print(f"\n Query: '{mood}'")
         # Recommend businesses blending mood similarity with business quality
         recommendations = recommend_businesses(mood, X, tfidf_vectorizer, merged_data, top_n=3, min_review_quality=2.0)
         
         if recommendations:
             for rec in recommendations:
                 print(f"  {rec['rank']}. {rec['name']} - {rec['category']}")
-                print(f"     ⭐ {rec['stars']} stars | 💰 Price: {rec['price']} | 📍 {rec['location']}")
-                print(f"     🎯 Similarity: {rec['similarity_score']:.3f} | 📈 Quality score: {rec['quality_score']:.3f}")
-                print(f"     💬 Review: {rec['review_text_sample']}")
+                print(f"      {rec['stars']} stars |  Price: {rec['price']} |  {rec['location']}")
+                print(f"      Similarity: {rec['similarity_score']:.3f} | 📈 Quality score: {rec['quality_score']:.3f}")
+                print(f"      Review: {rec['review_text_sample']}")
                 print()
         else:
-            print(f"  ❌ No recommendations found for '{mood}'")
+            print(f"   No recommendations found for '{mood}'")
 
 if __name__ == "__main__":
     main()
