@@ -1,6 +1,6 @@
 ﻿# Down-ML-Standalone
 
-A concise, recruiter-friendly showcase of a mood-based recommendation engine built on the Yelp Academic Dataset. It blends review text understanding (TFIDF) with business quality signals to recommend places that match a users vibe (e.g., "romantic dinner", "quiet coffee").
+Showcase of a mood-based recommendation engine built on the Yelp Academic Dataset. It blends review text understanding (TFIDF) with business quality signals to recommend and filter places that match a users vibe (e.g., "romantic dinner", "quiet coffee").
 
 ## Highlights
 - Mood understanding with TFIDF over review text (unigramstrigrams)
